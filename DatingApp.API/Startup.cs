@@ -52,16 +52,16 @@ namespace DatingApp.API
         // }
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<DataContext>(x =>
-            {
-                x.UseLazyLoadingProxies();
-                x.UseSqlServer(Configuration.GetConnectionString("SqlServerConnection"));
-            });
             // services.AddDbContext<DataContext>(x =>
             // {
             //     x.UseLazyLoadingProxies();
-            //     x.UseSqlite(Configuration.GetConnectionString("DefaultConnection"));
+            //     x.UseSqlServer(Configuration.GetConnectionString("SqlServerConnection"));
             // });
+            services.AddDbContext<DataContext>(x =>
+            {
+                x.UseLazyLoadingProxies();
+                x.UseSqlite(Configuration.GetConnectionString("DefaultConnection"));
+            });
 
             //services.AddControllers().AddNewtonsoftJson();
             services.AddControllers().AddNewtonsoftJson(opt =>
