@@ -4,7 +4,6 @@ GET http://localhost:5000
 ### Create a New User
 POST http://localhost:5000/api/auth/login
 Content-Type: application/json
-
 {
   "username": "lola",
   "password": "password"

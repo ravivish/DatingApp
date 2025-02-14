@@ -1,5 +1,6 @@
 using System;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -44,7 +45,7 @@ namespace DatingApp.API.Controllers
 
             var userToReturn = _mapper.Map<UserForDetailedDto>(newuser);
 
-            return CreatedAtRoute("GetUser",new {id=newuser.Id},userToReturn);
+            return CreatedAtRoute("GetUser", new { id = newuser.Id }, userToReturn);
 
         }
 
@@ -63,8 +64,12 @@ namespace DatingApp.API.Controllers
                 new Claim(ClaimTypes.Name,userFromRepo.Username)
             };
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.
-            GetBytes(_config.GetSection("AppSettings:Token").Value));
+            byte[] keyBytes = new byte[512]; // Create an array of 512 bytes
+            using (var rng = new RNGCryptoServiceProvider())
+            {
+                rng.GetBytes(keyBytes); // Fill the array with random bytes
+            }
+            var key = new SymmetricSecurityKey(keyBytes);
 
             var cred = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
 
