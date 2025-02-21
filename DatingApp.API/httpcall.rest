@@ -2,9 +2,26 @@
 GET http://localhost:5000
 
 ### Create a New User
+POST http://localhost:5000/api/auth/register
+Content-Type: application/json
+
+{
+  "username": "ravikumar",
+  "password": "MyPas@3",
+  "gender": "male",
+  "dateOfBirth": "1990-01-01",
+  "knownAs": "Ravi Vishwkarma",
+  "city": "Gurugram",
+  "country": "India"
+}
+
+### Login
 POST http://localhost:5000/api/auth/login
 Content-Type: application/json
+
 {
   "username": "lola",
   "password": "password"
 }
+
+### like

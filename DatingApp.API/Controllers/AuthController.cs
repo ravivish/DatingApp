@@ -65,10 +65,7 @@ namespace DatingApp.API.Controllers
             };
 
             byte[] keyBytes = new byte[512]; // Create an array of 512 bytes
-            using (var rng = new RNGCryptoServiceProvider())
-            {
-                rng.GetBytes(keyBytes); // Fill the array with random bytes
-            }
+            RandomNumberGenerator.Fill(keyBytes); // Fill the array with random bytes
             var key = new SymmetricSecurityKey(keyBytes);
 
             var cred = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
